@@ -1,23 +1,18 @@
 package com.fiap.challenge.targetcustomer.controller;
 
-import com.fiap.challenge.targetcustomer.model.Consulta;
-import com.fiap.challenge.targetcustomer.model.dto.ConsultaDTO;
+import com.fiap.challenge.targetcustomer.model.dto.CadastroNewDTO;
+import com.fiap.challenge.targetcustomer.model.dto.CadastroUpdateDTO;
+import com.fiap.challenge.targetcustomer.model.dto.ConsultaNewDTO;
 import com.fiap.challenge.targetcustomer.model.dto.ConsultaUpdateDTO;
 import com.fiap.challenge.targetcustomer.service.ConsultaService;
-import com.fiap.challenge.targetcustomer.utils.URIBuilder;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequestMapping("/consultas")
 public class ConsultaController {
 
@@ -30,32 +25,41 @@ public class ConsultaController {
         return "consultas";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/create")
     public String getForm(Model model) {
-
+        model.addAttribute("formDto", new CadastroNewDTO());
         return "new-consulta";
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Consulta> get(@PathVariable Long id) {
-        return consultaService
-                .get(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @PostMapping
+    public String newConsulta(@ModelAttribute @Valid ConsultaNewDTO consultaNewDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "new-consulta";
+        }
+        consultaService.create(consultaNewDTO);
+        return "redirect:/consultas";
     }
 
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<Object> destroy(@PathVariable Long id) {
-        log.info("Apagando consulta por id: {}", id);
-        consultaService.destroy(id);
-        return ResponseEntity.noContent().build();
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Long id){
+        consultaService.delete(id);
+        return "redirect:/consultas";
     }
 
+    @GetMapping("/edit/{id}")
+    public String getFormEdicao(Model model, @PathVariable Long id){
+        var consultaUpdateDTO = consultaService.getDtoFromId(id);
+        model.addAttribute("consultaUpdateDTO", consultaUpdateDTO);
+        return "update-consulta";
+    }
 
-    @PutMapping("{id}")
-    public ResponseEntity<Consulta> update(@PathVariable Long id, @RequestBody ConsultaUpdateDTO consultaRequest){
-        log.info("Atualizando e-mail de empresa id {} para {}", id, consultaRequest);
-        return ResponseEntity.ok(consultaService.update(id, consultaRequest));
+    @PostMapping("/edit")
+    public String update(@ModelAttribute @Valid ConsultaUpdateDTO consultaUpdateDTO, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "update-consulta";
+        }
+        consultaService.update(consultaUpdateDTO);
+        return "redirect:/consultas";
     }
 }

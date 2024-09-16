@@ -2,16 +2,17 @@ package com.fiap.challenge.targetcustomer.service;
 
 import com.fiap.challenge.targetcustomer.model.AnaliseConsulta;
 import com.fiap.challenge.targetcustomer.model.AnaliseConsultaStatus;
+import com.fiap.challenge.targetcustomer.model.Cadastro;
 import com.fiap.challenge.targetcustomer.model.Consulta;
-import com.fiap.challenge.targetcustomer.model.dto.ConsultaDTO;
+import com.fiap.challenge.targetcustomer.model.dto.CadastroUpdateDTO;
+import com.fiap.challenge.targetcustomer.model.dto.ConsultaNewDTO;
 import com.fiap.challenge.targetcustomer.model.dto.ConsultaUpdateDTO;
 import com.fiap.challenge.targetcustomer.repository.AnaliseConsultaRepository;
 import com.fiap.challenge.targetcustomer.repository.CadastroRepository;
 import com.fiap.challenge.targetcustomer.repository.ConsultaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,38 +29,35 @@ public class ConsultaService {
         return consultaRepository.findAll();
     }
 
-    public Consulta create(ConsultaDTO cadastroRequest, byte[] dataSetFile) {
-        var consulta = ConsultaDTO.toConsulta(cadastroRequest, dataSetFile);
-        var cadastro = cadastroRepository.findById(cadastroRequest.getIdCadastro())
+    public void create(ConsultaNewDTO consultaNewDTO) {
+        var consulta = ConsultaNewDTO.toConsulta(consultaNewDTO);
+        var cadastro = cadastroRepository.findById(consultaNewDTO.getIdCadastro())
                 .orElseThrow(
-                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cadastro não encontrado" )
+                        () -> new EntityNotFoundException("Cadastro não encontrado")
                 );
         consulta.setCadastro(cadastro);
-        consulta.setCsvArquivo(dataSetFile);
 
-        var createdConsulta = consultaRepository.save(consulta);
+        consultaRepository.save(consulta);
 
         var analiseConsulta = new AnaliseConsulta();
         analiseConsulta.setPdf(new byte[1]);
         analiseConsulta.setStatus(AnaliseConsultaStatus.INDISPONIVEL.value);
         analiseConsulta.setConsulta(consulta);
         analiseConsultaRepository.save(analiseConsulta);
-
-        return createdConsulta;
     }
 
-    public Optional<Consulta> get(Long id) {
-        return consultaRepository.findById(id);
+    public ConsultaUpdateDTO getDtoFromId(Long id) {
+        return ConsultaUpdateDTO.fromConsulta(verificarSeExisteConsulta(id));
     }
 
-    public void destroy(Long id) {
+    public void delete(Long id) {
         verificarSeExisteConsulta(id);
         consultaRepository.deleteById(id);
     }
 
-    public Consulta update(Long id, ConsultaUpdateDTO consultaRequest){
-        var consultaToUpdate = verificarSeExisteConsulta(id);
-        consultaToUpdate.setDescricaoConsulta(consultaRequest.descricao());
+    public Consulta update(ConsultaUpdateDTO consultaUpdateDTO){
+        var consultaToUpdate = verificarSeExisteConsulta(consultaUpdateDTO.getConsultaId());
+        consultaToUpdate.setDescricaoConsulta(consultaUpdateDTO.getDescricaoConsulta());
         return consultaRepository.save(consultaToUpdate);
     }
 
@@ -67,7 +65,7 @@ public class ConsultaService {
         return consultaRepository
                 .findById(id)
                 .orElseThrow(
-                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Consulta não encontrado" )
+                        () -> new EntityNotFoundException("Consulta não encontrado")
                 );
     }
 }

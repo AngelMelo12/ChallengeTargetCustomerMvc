@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,16 +32,37 @@ public class Cadastro {
     @Size(max = 80)
     private String razaoSocial;
 
-    @OneToMany(mappedBy = "cadastro", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "cadastro", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<EmailEmpresa> emailEmpresas;
 
-    @OneToMany(mappedBy = "cadastro", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "cadastro", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<EnderecoEmpresa> enderecosEmpresas;
 
-    @OneToMany(mappedBy = "cadastro", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "cadastro", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<TelefoneEmpresa> telefonesEmpresas;
+
+    public void addEmailEmpresa(EmailEmpresa emailEmpresa) {
+        if (this.emailEmpresas == null) {
+            emailEmpresas = new ArrayList<>();
+        }
+        emailEmpresas.add(emailEmpresa);
+    }
+
+    public void addEnderecoEmpresa(EnderecoEmpresa enderecoEmpresa) {
+        if (this.enderecosEmpresas == null) {
+            enderecosEmpresas = new ArrayList<>();
+        }
+        enderecosEmpresas.add(enderecoEmpresa);
+    }
+
+    public void addTelefoneEmpresa(TelefoneEmpresa telefoneEmpresa) {
+        if (this.telefonesEmpresas == null) {
+            telefonesEmpresas = new ArrayList<>();
+        }
+        telefonesEmpresas.add(telefoneEmpresa);
+    }
 
 }

@@ -1,9 +1,23 @@
 package com.fiap.challenge.targetcustomer.model.dto;
 
+import com.fiap.challenge.targetcustomer.model.Consulta;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import lombok.Data;
 
-public record ConsultaUpdateDTO(
-        @NotNull @Size(min = 5, message = "Descrição deve ser maior que 5 caracteres") String descricao
-) {
+import java.time.LocalDateTime;
+
+@Data
+public class ConsultaUpdateDTO {
+
+    @NotNull
+    private Long consultaId;
+
+    @NotNull
+    private String descricaoConsulta;
+
+    public static ConsultaUpdateDTO fromConsulta(Consulta consulta) {
+        var consultaDTO = new ConsultaUpdateDTO();
+        consultaDTO.setDescricaoConsulta(consulta.getDescricaoConsulta());
+        return consultaDTO;
+    }
 }

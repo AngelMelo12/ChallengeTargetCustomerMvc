@@ -1,71 +1,63 @@
 package com.fiap.challenge.targetcustomer.controller;
 
-import com.fiap.challenge.targetcustomer.model.Cadastro;
-import com.fiap.challenge.targetcustomer.model.dto.CadastroDTO;
+import com.fiap.challenge.targetcustomer.model.dto.CadastroNewDTO;
 import com.fiap.challenge.targetcustomer.model.dto.CadastroUpdateDTO;
 import com.fiap.challenge.targetcustomer.service.CadastroService;
-import com.fiap.challenge.targetcustomer.utils.URIBuilder;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("cadastro")
-@Slf4j
+@Controller
+@RequestMapping("/cadastros")
 public class CadastroController {
 
     @Autowired
     private CadastroService cadastroService;
 
     @GetMapping
-    public ResponseEntity<Page<Cadastro>> index(@PageableDefault Pageable pageable) {
-        return ResponseEntity.ok(cadastroService.index(pageable));
+    public String getCadastros(Model model) {
+        model.addAttribute("cadastros", cadastroService.findAll());
+        return "cadastros";
+    }
+
+    @GetMapping("/create")
+    public String getForm(Model model) {
+        model.addAttribute("formDto", new CadastroNewDTO());
+        return "new-cadastro";
     }
 
     @PostMapping
-    @Transactional
-    public ResponseEntity<Cadastro> create(@RequestBody @Valid CadastroDTO cadastroRequest) {
-        log.info("Cadastrando empresa: {}", cadastroRequest);
-        var createdCadastro = cadastroService.create(cadastroRequest);
-        return ResponseEntity
-                .created(URIBuilder.createFromId(createdCadastro.getId()))
-                .build();
+    public String newCadastro(@ModelAttribute @Valid CadastroNewDTO cadastroNewDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "new-cadastro";
+        }
+        cadastroService.create(cadastroNewDTO);
+        return "redirect:/cadastros";
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Cadastro> get(@PathVariable Long id) {
-        log.info("Buscar por id: {}", id);
-        return cadastroService.get(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound()
-                .build());
-    }
 
     @PostMapping("/delete/{id}")
-    public ResponseEntity<Object> destroy(@PathVariable Long id) {
-        log.info("Apagando cadastro por id: {}", id);
-        cadastroService.destroy(id);
-        return ResponseEntity.noContent().build();
+    public String delete(@PathVariable Long id){
+        cadastroService.delete(id);
+        return "redirect:/cadastros";
     }
 
-    @PutMapping("{id}")
-    @Transactional
-    public ResponseEntity<Cadastro> update(@PathVariable Long id, @RequestBody CadastroUpdateDTO cadastroRequest){
-        log.info("Atualizando cadastro id {} para {}", id, cadastroRequest);
-        return ResponseEntity.ok(cadastroService.update(id, cadastroRequest));
+    @GetMapping("/edit/{id}")
+    public String getFormEdicao(Model model, @PathVariable Long id){
+        CadastroUpdateDTO cadastroUpdateDTO = cadastroService.getDtoFromId(id);
+        model.addAttribute("cadastroUpdateDTO", cadastroUpdateDTO);
+        return "update-cadastro";
+    }
+
+    @PostMapping("/edit")
+    public String update(@ModelAttribute @Valid CadastroUpdateDTO cadastroUpdateDTO, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "update-cadastro";
+        }
+        cadastroService.update(cadastroUpdateDTO);
+        return "redirect:/medicos";
     }
 }

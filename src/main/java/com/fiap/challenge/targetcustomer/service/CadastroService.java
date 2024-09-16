@@ -1,17 +1,16 @@
 package com.fiap.challenge.targetcustomer.service;
 
 import com.fiap.challenge.targetcustomer.model.Cadastro;
-import com.fiap.challenge.targetcustomer.model.dto.CadastroDTO;
+import com.fiap.challenge.targetcustomer.model.dto.CadastroNewDTO;
 import com.fiap.challenge.targetcustomer.model.dto.CadastroUpdateDTO;
 import com.fiap.challenge.targetcustomer.repository.CadastroRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,37 +18,35 @@ public class CadastroService {
 
     private final CadastroRepository cadastroRepository;
 
-    public Page<Cadastro> index(Pageable pageable) {
-        return cadastroRepository.findAll(pageable);
+    public List<Cadastro> findAll() {
+        return cadastroRepository.findAll();
     }
 
-    public Cadastro create(CadastroDTO cadastroRequest) {
-        return cadastroRepository.save(CadastroDTO.toCadastro(cadastroRequest));
+    public void create(CadastroNewDTO cadastroRequest) {
+        cadastroRepository.save(CadastroNewDTO.toCadastro(cadastroRequest));
     }
 
-    public Optional<Cadastro> get(Long id) {
-        return cadastroRepository.findById(id);
+    public CadastroUpdateDTO getDtoFromId(Long id) {
+        return cadastroRepository.findById(id)
+                .map(CadastroUpdateDTO::fromCadastro)
+                .orElseThrow();
     }
 
-    public void destroy(Long id) {
+    public void delete(Long id) {
         verificarSeExisteCadastro(id);
         cadastroRepository.deleteById(id);
     }
 
-    public Cadastro update(Long id, CadastroUpdateDTO cadastroRequest){
-        var cadastroToUpdate = verificarSeExisteCadastro(id);
-        cadastroToUpdate.setCnpj(cadastroRequest.cnpj());
-        cadastroToUpdate.setSenha(cadastroRequest.senha());
-        cadastroToUpdate.setRazaoSocial(cadastroRequest.razaoSocial());
-
-        return cadastroRepository.save(cadastroToUpdate);
+    public Cadastro update(CadastroUpdateDTO cadastroRequest){
+        var cadastroToUpdate = verificarSeExisteCadastro(cadastroRequest.getId());
+        return cadastroRepository.save(CadastroUpdateDTO.toCadastro(cadastroToUpdate, cadastroRequest));
     }
 
     private Cadastro verificarSeExisteCadastro(Long id) {
         return cadastroRepository
                 .findById(id)
                 .orElseThrow(
-                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cadastro não encontrado" )
+                        () -> new EntityNotFoundException("Cadastro não encontrado" )
                 );
     }
 }
