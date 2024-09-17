@@ -19,6 +19,7 @@ Clone este repositório na sua pasta de preferência. Utilizando um terminal, di
 Caso esteja usando uma IDE, abra o projeto na seu editor de preferência, localize a classe **TargetcustomerApplication** e execute o projeto através do método main localizado nesta classe.
 
 ## Link do vídeo de apresentação na nossa Proposta tecnológica: 
-link
+https://www.youtube.com/watch?v=E7_jb_-nfBk
+
 
 
