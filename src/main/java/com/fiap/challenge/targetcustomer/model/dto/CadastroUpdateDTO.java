@@ -59,7 +59,6 @@ public class CadastroUpdateDTO {
 
     public static Cadastro toCadastro(Cadastro cadastro, CadastroUpdateDTO dto) {
         cadastro.setCnpj(dto.getCnpj());
-        cadastro.setSenha(dto.getSenha());
         cadastro.setRazaoSocial(dto.getRazaoSocial());
 
         var enderecosEmpresas = cadastro.getEnderecosEmpresas();
@@ -115,7 +114,6 @@ public class CadastroUpdateDTO {
 
         cadastroUpdateDTO.setId(cadastro.getId());
         cadastroUpdateDTO.setCnpj(cadastro.getCnpj());
-        cadastroUpdateDTO.setSenha(cadastro.getSenha());
         cadastroUpdateDTO.setRazaoSocial(cadastro.getRazaoSocial());
         cadastroUpdateDTO.setLogradouro(enderecoEmpresa.getLogradouro());
         cadastroUpdateDTO.setCep(enderecoEmpresa.getCep());

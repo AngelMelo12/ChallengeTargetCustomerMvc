@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "T_TC_CADSASTRO")
+@Table(name = "T_TC_CADASTRO")
 @Data
 @ToString
 public class Cadastro {
@@ -22,11 +22,6 @@ public class Cadastro {
 
     @Column(name = "nr_cnpj")
     private Long cnpj;
-
-    @Column(name = "varchar_senha")
-    @NotBlank
-    @Size(min = 5, max = 60, message = "Senha deve ter no mínimo 5 caracteres e no máximo 60 caracteres")
-    private String senha;
 
     @Column(name = "nm_razaosocial")
     @Size(max = 80)

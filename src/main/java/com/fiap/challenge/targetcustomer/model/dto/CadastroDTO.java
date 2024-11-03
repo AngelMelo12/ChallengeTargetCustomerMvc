@@ -15,10 +15,6 @@ public class CadastroDTO {
     private Long cnpj;
 
     @NotBlank
-    @Size(min = 5, max = 60, message = "Senha deve ter no mínimo 5 caracteres e no máximo 60 caracteres")
-    private String senha;
-
-    @NotBlank
     @Size(min = 5, max = 80)
     private String razaoSocial;
 
@@ -26,7 +22,6 @@ public class CadastroDTO {
         var cadastro = new Cadastro();
 
         cadastro.setCnpj(dto.getCnpj());
-        cadastro.setSenha(dto.getSenha());
         cadastro.setRazaoSocial(dto.getRazaoSocial());
         cadastro.setEnderecosEmpresas(new ArrayList<>());
         cadastro.setEmailEmpresas(new ArrayList<>());

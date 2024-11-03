@@ -36,6 +36,10 @@ public class TelefoneEmpresa {
     @JsonIgnore
     private Cadastro cadastro;
 
+    public String getTelefoneCompleto() {
+        return "+" + ddi + "(" + ddd +") " + telefone;
+    }
+
     @Override
     public String toString() {
         return "TelefoneEmpresa{" +

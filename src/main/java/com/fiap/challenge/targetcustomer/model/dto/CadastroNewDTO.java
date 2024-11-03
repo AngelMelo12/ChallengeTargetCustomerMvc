@@ -10,7 +10,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -18,10 +17,6 @@ public class CadastroNewDTO {
 
     @NotNull
     private Long cnpj;
-
-    @NotBlank
-    @Size(min = 5, max = 60, message = "Senha deve ter no mínimo 5 caracteres e no máximo 60 caracteres")
-    private String senha;
 
     @NotBlank
     @Size(min = 5, max = 80)
@@ -59,17 +54,18 @@ public class CadastroNewDTO {
         var cadastro = new Cadastro();
 
         cadastro.setCnpj(dto.getCnpj());
-        cadastro.setSenha(dto.getSenha());
         cadastro.setRazaoSocial(dto.getRazaoSocial());
 
         var enderecoEmpresa = new EnderecoEmpresa();
         enderecoEmpresa.setLogradouro(dto.getLogradouro());
         enderecoEmpresa.setCep(dto.getCep());
         enderecoEmpresa.setDescricaoPontoDeReferencia(dto.getDescricaoPontoDeReferencia());
+        enderecoEmpresa.setCadastro(cadastro);
         var enderecosEmpresas = List.of(enderecoEmpresa);
 
         var emailEmpresa = new EmailEmpresa();
         emailEmpresa.setEmail(dto.getEmail());
+        emailEmpresa.setCadastro(cadastro);
         var emailEmpresas = List.of(emailEmpresa);
 
         var telefoneEmpresa = new TelefoneEmpresa();
@@ -77,6 +73,7 @@ public class CadastroNewDTO {
         telefoneEmpresa.setDdd(dto.getDdd());
         telefoneEmpresa.setTelefone(dto.getTelefone());
         telefoneEmpresa.setTipoTelefone(dto.getTipoTelefone());
+        telefoneEmpresa.setCadastro(cadastro);
         var telefonesEmpresas = List.of(telefoneEmpresa);
 
         cadastro.setEnderecosEmpresas(enderecosEmpresas);

@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta charset="UTF-8">
-        <title>Target Customer</title>
-        <link rel="stylesheet" th:href="@{/css/styles.css}">
-    </head>
-    <body class="body-index">
-        <div class="container-index">
-            <a class="custom-button" href="/new-cadastro">
-                Novo Cadastro
-            </a>
+<head>
+    <meta charset="UTF-8">
+    <title>Target Customer</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="body-index">
+    <div class="container-box">
+        <a class="main-button" th:href="@{/cadastros/create}">
+            Novo Cadastro de Empresa
+        </a>
 
-            <a class="custom-button" href="/new-cadastro">
-                Novo Cadastro
-            </a>
+        <a class="main-button" th:href="@{/consultas/create}">
+            Nova Consulta
+        </a>
 
-            <a class="custom-button" th:href="@{/consultas}">
-                <p>Consultas</p>
-            </a>
+        <a class="main-button" th:href="@{/consultas}">
+            <p>Consultas</p>
+        </a>
 
-            <a class="custom-button" th:href="@{/cadastros}">
-                <p>Cadastros</p>
-            </a>
-        </div>
-    </body>
+        <a class="main-button" th:href="@{/cadastros}">
+            <p>Cadastros</p>
+        </a>
+
+        <a class="main-button" th:href="@{/logout}">
+            <p>Logout</p>
+        </a>
+    </div>
+</body>
 </html>

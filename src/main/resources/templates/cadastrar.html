@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup Form</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script src="/js/cadastrar.js" defer></script>
+</head>
+<body class="body-index">
+    <section>
+        <form id="cadastro-form" action="/user/cadastrar" method="post">
+            <h1>Novo cadastro</h1>
+            <div class="inputbox">
+                <input type="email" id="email" name="email" required>
+                <label for="email">E-mail</label>
+            </div>
+            <div class="inputbox">
+                <input type="password" id="password" name="password" required>
+                <label for="password">Senha</label>
+            </div>
+            <button type="submit">Cadastrar</button>
+            <div class="register">
+                <p>Já possui uma conta? <a href="/user/login">Acesse o site</a></p>
+            </div>
+        </form>
+    </section>
+</body>
+</html>

@@ -38,7 +38,6 @@ public class CadastroController {
         return "redirect:/cadastros";
     }
 
-
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Long id){
         cadastroService.delete(id);
