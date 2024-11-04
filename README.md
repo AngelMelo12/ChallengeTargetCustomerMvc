@@ -8,7 +8,7 @@
 - Lucca Rinaldi Valladão de Freitas - RM98207
 
 ## Vídeo explicativo no YouTube
-Link vídeo do youtube
+[Link vídeo do youtube](https://www.youtube.com/watch?v=2U7Au61ex6s)
 
 ## Descrição
 A Plusoft veio com o seguinte desafio: “Desvendando o Potencial dos Dados: Explorando a AI Generativa e o Deep Analytics para impulsionar o Crescimento Empresarial”.
