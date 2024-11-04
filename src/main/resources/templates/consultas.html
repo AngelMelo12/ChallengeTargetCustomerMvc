@@ -2,12 +2,31 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Target Customer</title>
+    <title>Consultas</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body class="body-index">
-    <div class="container-box">
+    <section class="container-box">
         <h1>Consultas</h1>
-    </div>
+        <div th:each="consulta : ${consultas}" class="container-list">
+            <div class="container-content">
+                <h3>Descrição</h3>
+                <p th:text="${consulta.getDescricaoConsulta()}"></p><br>
+
+                <h3>Data da consulta</h3>
+                <p th:text="${#temporals.format(consulta.getDataConsulta(), 'dd-MM-yyyy HH:mm')}"></p>
+
+                <h3>Empresa</h3>
+                <p th:text="${consulta.getCadastro().getRazaoSocial()}"></p><br>
+
+                <div class="content-action">
+                    <div>
+                        <a href="#" class="edit-button">Analisar</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
 </body>
 </html>

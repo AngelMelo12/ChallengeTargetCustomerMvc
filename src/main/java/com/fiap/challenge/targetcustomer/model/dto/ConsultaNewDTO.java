@@ -15,15 +15,11 @@ public class ConsultaNewDTO {
     @NotNull
     private String descricaoConsulta;
 
-    @NotNull
-    private byte[] file;
-
     public static Consulta toConsulta(ConsultaNewDTO consultaDTO) {
         var consulta = new Consulta();
 
         consulta.setDescricaoConsulta(consultaDTO.getDescricaoConsulta());
         consulta.setDataConsulta(LocalDateTime.now());
-        consulta.setCsvArquivo(consultaDTO.getFile());
 
         return consulta;
     }

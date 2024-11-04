@@ -15,38 +15,39 @@ import java.util.List;
 @Data
 public class CadastroNewDTO {
 
-    @NotNull
+    @NotNull(message = "CNPJ não pode ser vazio!")
     private Long cnpj;
 
-    @NotBlank
-    @Size(min = 5, max = 80)
+    @NotBlank(message = "Razão social não pode ser vazia!")
+    @Size(min = 1, max = 80, message = "Razão social muito curta!")
     private String razaoSocial;
 
     // Endereço
-    @NotNull
+    @NotNull(message = "Logradouro não pode ser vazio!")
     private Long logradouro;
 
-    @NotNull
+    @NotNull(message = "CEP não pode ser vazio!")
     private Long cep;
 
-    @NotBlank
+    @NotBlank(message = "Digite alguma referência!")
     private String descricaoPontoDeReferencia;
 
     // E-mail
-    @NotNull @Email(message = "E-mail deve estar em formatação válida")
+    @NotNull(message = "E-mail não pode ser vazio!")
+    @Email(message = "E-mail deve estar em formatação válida")
     private String email;
 
     // Telefone
-    @NotNull
+    @NotNull(message = "DDI não pode ser vazio!")
     private Long ddi;
 
-    @NotNull
+    @NotNull(message = "DDD não pode ser vazio!")
     private Long ddd;
 
-    @NotNull
+    @NotNull(message = "Telefone não pode ser vazio!")
     private Long telefone;
 
-    @NotNull
+    @NotNull(message = "Tipo do telefone não pode ser vazio!")
     @Size(max = 20)
     private String tipoTelefone;
 

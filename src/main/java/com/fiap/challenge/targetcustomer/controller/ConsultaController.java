@@ -4,6 +4,7 @@ import com.fiap.challenge.targetcustomer.model.dto.CadastroNewDTO;
 import com.fiap.challenge.targetcustomer.model.dto.CadastroUpdateDTO;
 import com.fiap.challenge.targetcustomer.model.dto.ConsultaNewDTO;
 import com.fiap.challenge.targetcustomer.model.dto.ConsultaUpdateDTO;
+import com.fiap.challenge.targetcustomer.service.CadastroService;
 import com.fiap.challenge.targetcustomer.service.ConsultaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class ConsultaController {
     @Autowired
     private ConsultaService consultaService;
 
+    @Autowired
+    private CadastroService cadastroService;
+
     @GetMapping
     public String getConsultas(Model model) {
         model.addAttribute("consultas", consultaService.findAll());
@@ -27,7 +31,8 @@ public class ConsultaController {
 
     @GetMapping("/create")
     public String getForm(Model model) {
-        model.addAttribute("formDto", new CadastroNewDTO());
+        model.addAttribute("consultaNewDTO", new ConsultaNewDTO());
+        model.addAttribute("cadastros", cadastroService.findAll());
         return "new-consulta";
     }
 

@@ -24,10 +24,6 @@ public class Consulta {
     @Column(name = "dt_consulta")
     private LocalDateTime dataConsulta;
 
-    @Column(name = "blob_csv_arquivo")
-    @Lob
-    private byte[] csvArquivo;
-
     @ManyToOne
     @JoinColumn(name = "id_cadastro")
     @JsonIgnore

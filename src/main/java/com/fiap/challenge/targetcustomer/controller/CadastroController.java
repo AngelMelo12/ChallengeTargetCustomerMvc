@@ -25,7 +25,7 @@ public class CadastroController {
 
     @GetMapping("/create")
     public String getForm(Model model) {
-        model.addAttribute("formDto", new CadastroNewDTO());
+        model.addAttribute("cadastroNewDTO", new CadastroNewDTO());
         return "new-cadastro";
     }
 
@@ -57,6 +57,6 @@ public class CadastroController {
             return "update-cadastro";
         }
         cadastroService.update(cadastroUpdateDTO);
-        return "redirect:/medicos";
+        return "redirect:/cadastros";
     }
 }

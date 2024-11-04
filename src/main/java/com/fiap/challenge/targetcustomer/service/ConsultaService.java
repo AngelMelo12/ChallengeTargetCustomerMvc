@@ -40,7 +40,6 @@ public class ConsultaService {
         consultaRepository.save(consulta);
 
         var analiseConsulta = new AnaliseConsulta();
-        analiseConsulta.setPdf(new byte[1]);
         analiseConsulta.setStatus(AnaliseConsultaStatus.INDISPONIVEL.value);
         analiseConsulta.setConsulta(consulta);
         analiseConsultaRepository.save(analiseConsulta);

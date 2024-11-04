@@ -7,23 +7,20 @@
 </head>
 <body class="body-index">
     <section class="container-box">
-        <form action="/user/login" method="post">
+        <form class="form-box" action="/user/login" method="post">
             <h1>Login</h1>
             <div class="error-message-box">
                 <label th:if="${param.error}" th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}" class="text-center redText"></label>
             </div>
-            <div class="input-text">
-                <input type="email" name="username" id="username" required>
+            <div class="form-cell">
                 <label for="username">E-mail de Usuário</label>
+                <input type="email" name="username" id="username" required>
             </div>
-            <div class="input-text">
-                <input type="password" name="password" id="password" required>
+            <div class="form-cell">
                 <label for="password">Senha</label>
+                <input type="password" name="password" id="password" required>
             </div>
-            <div class="register">
-                <a href="#"><p>Esqueceu sua senha?</p></a>
-            </div>
-            <button>Log in</button>
+            <button class="edit-button">Acessar</button>
             <div class="register">
                 <p>Não possui uma conta ?</p>
                 <a href="/user/cadastrar"> Cadastre-se</a>

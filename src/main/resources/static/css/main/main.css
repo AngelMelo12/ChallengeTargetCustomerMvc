@@ -11,6 +11,15 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.body-index {
+    align-items: center;
+    height: 100vh;
+}
+
+.register {
+
+}
+
 .container-box {
 
 }
@@ -19,7 +28,11 @@ body {
 
 }
 
-.container-action {
+.container-content {
+
+}
+
+.content-action {
 
 }
 
@@ -31,27 +44,31 @@ body {
 
 }
 
-.message-box {
+.form-box {
 
 }
 
-.input-text {
+.form-row {
 
 }
 
-.form-new {
+.form-cell {
 
 }
 
-.input-new {
+.label-new {
 
 }
 
-.laabel-new {
+.input-field {
 
 }
 
-.error-message {
+.input-field-box {
+
+}
+
+.error-message-box {
     color: red;
     font-size: 0.8em;
     margin-top: 2px;

@@ -2,12 +2,36 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Target Customer</title>
+    <title>Nova consulta</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body class="body-index">
-    <div class="container-box">
-        <h1>Nova Consulta</h1>
-    </div>
+<section class="container-box">
+    <h1>Nova consulta</h1>
+
+    <form class="form-box" method="POST" th:action="@{/consultas}" th:object="${consultaNewDTO}">
+
+        <div class="form-row">
+            <div class="form-cell">
+                <label for="descricaoConsulta" class="label-new">Descrição</label>
+                <textarea name="descricaoConsulta" id="descricaoConsulta" class="input-field-box" th:field="*{descricaoConsulta}"></textarea>
+<!--                <input type="" th:field="*{cnpj}" name="cnpj" id="cnpj" class="input-field">-->
+                <div class="error-message-box" th:if="${#fields.hasErrors('descricaoConsulta')}" th:errors="*{descricaoConsulta}"></div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label for="empresa" class="label-new">Empresa</label>
+            <select id="empresa" name="empresa" th:field="*{idCadastro}" class="input-field">
+                <option value="" disabled selected>Escolha uma empresa</option>
+                <option th:each="cadastro : ${cadastros}" th:value="${cadastro.getId()}" th:text="${cadastro.getRazaoSocial()}"></option>
+            </select>
+            <div class="error-message" th:if="${#fields.hasErrors('idCadastro')}" th:errors="*{idCadastro}"></div>
+        </div>
+
+        <button class="edit-button" type="submit">Salvar</button>
+    </form>
+
+</section>
 </body>
 </html>

@@ -2,47 +2,46 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Target Customer</title>
+    <title>Novo cadastro de empresa</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body class="body-index">
-    <div class="container-box">
+    <section class="container-box">
         <h1>Novo Cadastro</h1>
 
-        <form method="POST" th:action="@{/cadastros}" th:object="${formDto}" class="form-new">
-            <h2 class="titulo">Novo Cadastro</h2>
+        <form class="form-box" method="POST" th:action="@{/cadastros}" th:object="${cadastroNewDTO}">
 
             <div class="form-row">
-                <div class="form-group">
+                <div class="form-cell">
                     <label for="cnpj" class="label-new">CNPJ</label>
-                    <input type="text" th:field="*{cnpj}" name="cnpj" id="cnpj" class="input-new">
+                    <input type="text" th:field="*{cnpj}" name="cnpj" id="cnpj" class="input-field">
                     <div class="error-message-box" th:if="${#fields.hasErrors('cnpj')}" th:errors="*{cnpj}"></div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-cell">
                     <label for="razaoSocial" class="label-new">Razão Social</label>
-                    <input type="text" th:field="*{razaoSocial}" name="razaoSocial" id="razaoSocial" class="input-new">
+                    <input type="text" th:field="*{razaoSocial}" name="razaoSocial" id="razaoSocial" class="input-field">
                     <div class="error-message-box" th:if="${#fields.hasErrors('razaoSocial')}" th:errors="*{razaoSocial}"></div>
                 </div>
             </div>
 
             <div class="form-row">
 
-                <div class="form-group">
+                <div class="form-cell">
                     <label for="logradouro" class="label-new">Logradouro</label>
-                    <input type="text" th:field="*{logradouro}" name="logradouro" id="logradouro" class="input-new">
+                    <input type="text" th:field="*{logradouro}" name="logradouro" id="logradouro" class="input-field">
                     <div class="error-message-box" th:if="${#fields.hasErrors('logradouro')}" th:errors="*{logradouro}"></div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-cell">
                     <label for="cep" class="label-new">CEP</label>
-                    <input type="text" th:field="*{cep}" name="cep" id="cep" class="input-new">
+                    <input type="text" th:field="*{cep}" name="cep" id="cep" class="input-field">
                     <div class="error-message-box" th:if="${#fields.hasErrors('cep')}" th:errors="*{cep}"></div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-cell">
                     <label for="descricaoPontoDeReferencia" class="label-new">Referência</label>
-                    <input type="text" th:field="*{descricaoPontoDeReferencia}" name="descricaoPontoDeReferencia" id="descricaoPontoDeReferencia" class="input-new">
+                    <input type="text" th:field="*{descricaoPontoDeReferencia}" name="descricaoPontoDeReferencia" id="descricaoPontoDeReferencia" class="input-field">
                     <div class="error-message-box" th:if="${#fields.hasErrors('descricaoPontoDeReferencia')}" th:errors="*{descricaoPontoDeReferencia}"></div>
                 </div>
 
@@ -50,9 +49,9 @@
 
             <div class="form-row">
 
-                <div class="form-group">
+                <div class="form-cell">
                     <label for="email" class="label-new">E-mail</label>
-                    <input type="text" th:field="*{email}" name="email" id="email" class="input-new">
+                    <input type="text" th:field="*{email}" name="email" id="email" class="input-field">
                     <div class="error-message-box" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                 </div>
 
@@ -60,27 +59,27 @@
 
             <div class="form-row">
 
-                <div class="form-group">
+                <div class="form-cell">
                     <label for="ddi" class="label-new">DDI</label>
-                    <input type="text" th:field="*{ddi}" name="ddi" id="ddi" class="input-new">
+                    <input type="text" th:field="*{ddi}" name="ddi" id="ddi" class="input-field">
                     <div class="error-message-box" th:if="${#fields.hasErrors('ddi')}" th:errors="*{ddi}"></div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-cell">
                     <label for="ddd" class="label-new">DDD</label>
-                    <input type="text" th:field="*{ddd}" name="ddd" id="ddd" class="input-new">
+                    <input type="text" th:field="*{ddd}" name="ddd" id="ddd" class="input-field">
                     <div class="error-message-box" th:if="${#fields.hasErrors('ddd')}" th:errors="*{ddd}"></div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-cell">
                     <label for="telefone" class="label-new">Telefone</label>
-                    <input type="text" th:field="*{telefone}" name="telefone" id="telefone" class="input-new">
+                    <input type="text" th:field="*{telefone}" name="telefone" id="telefone" class="input-field">
                     <div class="error-message-box" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-cell">
                     <label for="tipoTelefone" class="label-new">Tipo Telefone</label>
-                    <input type="text" th:field="*{tipoTelefone}" name="telefone" id="tipoTelefone" class="input-new">
+                    <input type="text" th:field="*{tipoTelefone}" name="telefone" id="tipoTelefone" class="input-field">
                     <div class="error-message-box" th:if="${#fields.hasErrors('tipoTelefone')}" th:errors="*{tipoTelefone}"></div>
                 </div>
 
@@ -89,6 +88,6 @@
             <button class="edit-button" type="submit">Salvar</button>
         </form>
 
-    </div>
+    </section>
 </body>
 </html>

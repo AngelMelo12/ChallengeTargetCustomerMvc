@@ -16,10 +16,6 @@ public class AnaliseConsulta {
     @Column(name = "id_analise_da_consulta")
     private Long id;
 
-    @Column(name = "pdf_analise_da_consulta")
-    @Lob
-    private byte[] pdf;
-
     @Column(name = "st_analise_da_consulta")
     private char status;
 
