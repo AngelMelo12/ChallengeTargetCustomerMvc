@@ -8,10 +8,15 @@
 <body class="body-index">
     <section class="container-box">
         <h1>Empresas cadastradas</h1>
-        <div class="container-list">
+        <div class="container-menu">
             <a class="main-button-back" th:href="@{/}">
-                <p>Retornar ao menu principal</p>
+                <p>Menu principal</p>
             </a>
+            <a class="main-button-back" th:href="@{/cadastros/create}">
+                <p>Nova empresa</p>
+            </a>
+        </div>
+        <div class="container-list">
             <div th:each="cadastro : ${cadastros}" class="container-content">
                 <h3 th:text="'CNPJ: ' + ${cadastro.getCnpj()}"></h3>
                 <h3>Razão Social</h3>
@@ -19,34 +24,33 @@
 
                 <div>
                     <h3>E-mails cadastrados</h3>
-                    <div th:each="email : ${cadastro.getEmailEmpresas()}" class="container-list">
+                    <div th:each="email : ${cadastro.getEmailEmpresas()}">
                         <p th:text="${email.getEmail()}"></p><br>
                     </div>
                 </div>
 
                 <div>
                     <h3>CEPs cadastrados</h3>
-                    <div th:each="endereco : ${cadastro.getEnderecosEmpresas()}" class="container-list">
+                    <div th:each="endereco : ${cadastro.getEnderecosEmpresas()}">
                         <p th:text="${endereco.getCep()}"></p><br>
                     </div>
                 </div>
 
                 <div>
                     <h3>Telefones cadastrados</h3>
-                    <div th:each="telefone : ${cadastro.getTelefonesEmpresas()}" class="container-list">
+                    <div th:each="telefone : ${cadastro.getTelefonesEmpresas()}">
                         <p th:text="${telefone.getTelefoneCompleto()}"></p><br>
                     </div>
                 </div>
 
 
                 <div class="content-action">
-                    <form th:action="@{/cadastros/delete/{id}(id=${cadastro.getId()})}" method="post" style="display:inline;">
-                        <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este cadastro?');" class="exclude-button">Excluir</button>
-                    </form>
-
                     <div class="edit-button">
                         <a th:href="@{/cadastros/edit/{id}(id=${cadastro.getId()})}">Editar</a>
                     </div>
+                    <form th:action="@{/cadastros/delete/{id}(id=${cadastro.getId()})}" method="post" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este cadastro?');" class="exclude-button">Excluir</button>
+                    </form>
                 </div>
             </div>
 

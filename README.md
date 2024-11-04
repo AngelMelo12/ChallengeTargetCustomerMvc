@@ -11,7 +11,8 @@
 Link vídeo do youtube
 
 ## Descrição
-Descrever o projeto e as intenções
+A Plusoft veio com o seguinte desafio: “Desvendando o Potencial dos Dados: Explorando a AI Generativa e o Deep Analytics para impulsionar o Crescimento Empresarial”.
+Com a seguinte pergunta: “Como a AI generativa e o deep analytics podem ajudar nesse processo?”. Tendo isso em mente, nós pensamos numa solução, onde criamos uma empresa, que é a Target Customer, no qual nós disponibilizamos um serviço de consultoria para classificar um público alvo de uma empresa contratante, através dos dados que recebemos por essa empresa.
 
 ## Tecnologias
 - *Java 17*

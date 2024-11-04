@@ -8,9 +8,14 @@
 <body class="body-index">
     <section class="container-box">
         <h1>Nova consulta</h1>
-        <a class="main-button-back" th:href="@{/}">
-            <p>Retornar ao menu principal</p>
-        </a>
+        <div class="container-menu">
+            <a class="main-button-back" th:href="@{/}">
+                <p>Menu principal</p>
+            </a>
+            <a class="main-button-back" th:href="@{/consultas}">
+                <p>Consultas</p>
+            </a>
+        </div>
         <form class="form-box" method="POST" th:action="@{/consultas}" th:object="${consultaNewDTO}">
 
             <div class="form-row">
