@@ -51,7 +51,7 @@ public class SecurityConfig {
                     httpForm.defaultSuccessUrl("/",true);
                 })
                 .authorizeHttpRequests(registry -> {
-                    registry.requestMatchers("/user/cadastrar","/css/**", "/js/**","/help", "/h2-console/*").permitAll();
+                    registry.requestMatchers("/user/cadastrar","/css/**", "/img/**", "/js/**","/help", "/h2-console/*").permitAll();
                     registry.anyRequest().authenticated();
                 })
                 .build();

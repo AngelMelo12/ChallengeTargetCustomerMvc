@@ -18,8 +18,8 @@ public class EnderecoEmpresa {
     @Column(name = "id_endereco")
     private Long id;
 
-    @Column(name = "nr_logradouro")
-    private Long logradouro;
+    @Column(name = "ds_logradouro")
+    private String logradouro;
 
     private Long cep;
 

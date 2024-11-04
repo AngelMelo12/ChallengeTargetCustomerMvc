@@ -7,12 +7,15 @@
 </head>
 <body class="body-index">
     <div class="container-box">
+        <img th:src="@{/img/tc-logo.png}" height="250" width="250"/>
+        <h3>Bem vindo ao Target Customer, sua plataforma de análise e consultoria de dados.</h3>
+
         <a class="main-button" th:href="@{/cadastros/create}">
-            <p>Novo Cadastro de Empresa</p>
+            <p>Nova empresa</p>
         </a>
 
         <a class="main-button" th:href="@{/consultas/create}">
-            <p>Nova Consulta</p>
+            <p>Nova consulta</p>
         </a>
 
         <a class="main-button" th:href="@{/consultas}">
@@ -20,7 +23,7 @@
         </a>
 
         <a class="main-button" th:href="@{/cadastros}">
-            <p>Cadastros</p>
+            <p>Empresas</p>
         </a>
 
         <a class="main-button" th:href="@{/logout}">

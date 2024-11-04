@@ -8,7 +8,9 @@
 <body class="body-index">
     <section class="container-box">
         <h1>Novo Cadastro</h1>
-
+        <a class="main-button-back" th:href="@{/}">
+            <p>Retornar ao menu principal</p>
+        </a>
         <form class="form-box" method="POST" th:action="@{/cadastros}" th:object="${cadastroNewDTO}">
 
             <div class="form-row">

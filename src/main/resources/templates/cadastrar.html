@@ -6,7 +6,8 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body class="body-index">
-    <section>
+    <section class="container-box">
+        <img th:src="@{/img/tc-logo.png}" height="250" width="250"/>
         <form class="form-box" id="cadastro-form" action="/user/cadastrar" method="post">
             <h1>Novo cadastro</h1>
             <div class="form-cell">
@@ -17,7 +18,7 @@
                 <label for="password">Senha</label>
                 <input type="password" id="password" name="password" class="input-field" required>
             </div>
-            <button type="submit">Cadastrar</button>
+            <button type="submit" class="edit-button">Cadastrar</button>
             <div class="register">
                 <p>Já possui uma conta? <a href="/user/login">Acessar</a></p>
             </div>

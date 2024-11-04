@@ -7,8 +7,10 @@
 </head>
 <body class="body-index">
     <section class="container-box">
+        <a class="main-button-back" th:href="@{/}">
+            <p>Retornar ao menu principal</p>
+        </a>
         <h1>Atualizar cadastro de empresa</h1>
-
         <form class="form-box" method="POST" th:action="@{/cadastros/edit}" th:object="${cadastroUpdateDTO}">
             <input type="hidden" th:field="*{id}" />
             <div class="form-row">

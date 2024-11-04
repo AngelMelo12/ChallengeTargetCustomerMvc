@@ -24,7 +24,7 @@ public class CadastroNewDTO {
 
     // Endereço
     @NotNull(message = "Logradouro não pode ser vazio!")
-    private Long logradouro;
+    private String logradouro;
 
     @NotNull(message = "CEP não pode ser vazio!")
     private Long cep;

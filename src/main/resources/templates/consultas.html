@@ -8,8 +8,11 @@
 <body class="body-index">
     <section class="container-box">
         <h1>Consultas</h1>
-        <div th:each="consulta : ${consultas}" class="container-list">
-            <div class="container-content">
+        <div class="container-list">
+            <a class="main-button-back" th:href="@{/cadastros}">
+                <p>Retornar</p>
+            </a>
+            <div th:each="consulta : ${consultas}" class="container-content">
                 <h3>Descrição</h3>
                 <p th:text="${consulta.getDescricaoConsulta()}"></p><br>
 
@@ -20,8 +23,8 @@
                 <p th:text="${consulta.getCadastro().getRazaoSocial()}"></p><br>
 
                 <div class="content-action">
-                    <div>
-                        <a href="#" class="edit-button">Analisar</a>
+                    <div class="edit-button">
+                        <a href="#">Analisar</a>
                     </div>
                 </div>
             </div>

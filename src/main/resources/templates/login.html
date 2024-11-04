@@ -7,6 +7,7 @@
 </head>
 <body class="body-index">
     <section class="container-box">
+        <img th:src="@{/img/tc-logo.png}" height="250" width="250"/>
         <form class="form-box" action="/user/login" method="post">
             <h1>Login</h1>
             <div class="error-message-box">
@@ -14,13 +15,13 @@
             </div>
             <div class="form-cell">
                 <label for="username">E-mail de Usuário</label>
-                <input type="email" name="username" id="username" required>
+                <input type="email" name="username" id="username" class="input-field" required>
             </div>
             <div class="form-cell">
                 <label for="password">Senha</label>
-                <input type="password" name="password" id="password" required>
+                <input type="password" name="password" id="password" class="input-field" required>
             </div>
-            <button class="edit-button">Acessar</button>
+            <button type="submit" class="edit-button">Acessar</button>
             <div class="register">
                 <p>Não possui uma conta ?</p>
                 <a href="/user/cadastrar"> Cadastre-se</a>
